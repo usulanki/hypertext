@@ -1,0 +1,383 @@
+.required{
+    color: #ff0000;
+}
+.error-class{
+	color: #ff0000;
+	font-size: 12px;
+}
+
+/* Header related css - starts here */
+.header_logo{
+	width: 30px;
+	height: 30px;
+}
+
+
+/* Booking css */
+
+.badge-primary {
+	color: #fff;
+	background-color: #a0a0a0;
+	padding: 5px;
+	margin: 0px 5px 5px 0px;
+ }
+  .seatrow {
+	display: inline-flex;
+ }
+  .pricing-label {
+	font-weight: bold;
+	margin: 0px 0px 16px 16px;
+	padding: 0;
+	text-align: left;
+	color: #a0a0a0;
+	border-bottom: 1px solid #e2e2e2;
+ }
+  .seat-item {
+	height: 52px;
+	width: 60px;
+	line-height: 25px;
+	margin: 3px;
+	border-radius: 7px;
+	font-size: 14px;
+	padding-left: 5px;
+ }
+  .seat-space {
+	background-color: white;
+	border: 0;
+ }
+  .seat-available {
+	color: #a0a0a0;
+	background-color: white;
+	font-weight: bolder;
+	border: 1px solid #a0a0a0;
+ }
+  .seat-available:hover {
+	color: #a0a0a0;
+	background-color: #eee9e9;;
+	border: 1px solid #2c3c3e;
+ }
+  .seat-unavailable {
+	color: white;
+	background-color: black;
+	font-weight: bolder;
+	border: 1px solid white;
+ }
+  .seat-booked {
+	color: white;
+	font-weight: bolder;
+	background-color: #28a745;
+	border: 1px solid white;
+ }
+ .seat-selected {
+	color: white;
+	font-weight: bolder;
+	background-color: #007bff;
+	border: 1px solid white;
+ }
+ .seat-notavailable {
+	color: white;
+	font-weight: bolder;
+	background-color: #343a40;
+	border: 1px solid white;
+ }
+  .seat-item:hover {
+	cursor: pointer;
+ }
+  .seat-container {
+	overflow-x: auto;
+	overflow-y: hidden;
+ }
+  .seat-screen {
+	background-color: gray;
+	color: white;
+	padding: 1%;
+	text-align: center;
+	font-weight: bolder;
+ }
+  .bookingbar {
+	z-index: 1000;
+	bottom: 0;
+	position: fixed;
+	background: white;
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, .5);
+	width: 102%;
+ }
+  .bookingbar h5 {
+	font-weight: bold;
+ }
+  .bookingbar .book-area {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+ }
+  .bookingbar .book-area button {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+ }
+  .total-amount {
+	background-color: #f17924;
+	color: white;
+	cursor: pointer;
+ }
+  .row-label {
+	color: black;
+	background-color: white;
+	min-width: 20px;
+	font-weight: bolder;
+	line-height: 32px;
+ }
+  .booking-summary {
+	display: inline-flex;
+ }
+  .summary-bar {
+	margin-top: 1%;
+ }
+  .no-padding {
+	padding: 0;
+ }
+ 
+  /* Booking side navigation menu */
+ .sidenav {
+   height: 100%; /* 100% Full-height */
+   width: 0; /* 0 width - change this with JavaScript */
+   position: fixed; /* Stay in place */
+   z-index: 1; /* Stay on top */
+   top: 0; /* Stay at the top */
+   right: 0;
+   background-color: #ffff; /* Black*/
+   overflow-x: hidden; /* Disable horizontal scroll */
+   padding-top: 60px; /* Place content 60px from the top */
+   transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+ }
+ 
+ /* The navigation menu links */
+ .sidenav a {
+   padding: 8px 8px 8px 32px;
+   text-decoration: none;
+   font-size: 25px;
+   color: #818181;
+   display: block;
+   transition: 0.3s;
+ }
+ 
+ /* When you mouse over the navigation links, change their color */
+ .sidenav a:hover {
+   color: #f1f1f1;
+ }
+ 
+ /* Position and style the close button (top right corner) */
+ .sidenav .closebtn {
+   position: absolute;
+   top: 0;
+   right: 25px;
+   font-size: 36px;
+   margin-left: 50px;
+ }
+ 
+ /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+ #main {
+   transition: margin-right .5s;
+   padding: 20px;
+ }
+ 
+ /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+ @media screen and (max-height: 450px) {
+   .sidenav {padding-top: 15px;}
+   .sidenav a {font-size: 18px;}
+ } 
+
+/**	Date slider slick Ends	**/
+
+body .nav-tabs {
+	border-bottom: none;
+}
+body button.owl-prev {
+	position: absolute;
+	left: 0px;
+	top: 37%;
+	transform: translateY(-50%);
+	background-color: white !important;
+	width: 20px;
+	height: 20px;
+	border-radius: 100% !important;
+	color: #000 !important;
+}
+body button.owl-next {
+	position: absolute;
+	right: 0px;
+	top: 37%;
+	transform: translateY(-50%);
+	background-color: white !important;
+	width: 20px;
+	height: 20px;
+	border-radius: 100% !important;
+	color: #000 !important;
+}
+body .owl-dots {
+	display: none;
+}
+body .item {
+	display: flex;
+	justify-content: center;
+}
+body .item li a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 60px;
+	height: 60px;
+	background-color: #fff;
+	border-radius: 100%;
+	color: #000;
+	text-transform: uppercase;
+	flex-wrap: wrap;
+	text-align: center;
+	font-size: 20px;
+	text-decoration: none;
+	font-weight: 700;
+}
+body .item li.active a {
+	background-color: #009688;
+	color: #fff;
+}
+body .tab-content {
+	padding: 20px;
+	background-color: #fff;
+	font-size: 17px;
+	text-align: center;
+	line-height: 25px;
+	margin-top: 30px;
+	border-radius: 19px;
+}
+body .tab-content h3 {
+	font-size: 40px;
+	font-weight: bold;
+}
+
+.owl-item { width : 110px !important; }
+
+.nav-tabs{
+	width :579px !important;
+}
+
+.dateslick li{
+    border: 1px solid #2c3c3e;
+    border-radius: 33px;
+}
+/**	Date slider slick Ends	**/
+
+/**	Snack bar starts	**/
+
+#snackbar {
+	visibility: hidden;
+	min-width: 250px;
+	margin-left: -125px;
+	background-color: #333;
+	color: #fff;
+	text-align: center;
+	border-radius: 2px;
+	padding: 16px;
+	position: fixed;
+	z-index: 1;
+	left: 50%;
+	bottom: 30px;
+	font-size: 17px;
+  }
+  
+  #snackbar.show {
+	visibility: visible;
+	-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  
+  @-webkit-keyframes fadein {
+	from {bottom: 0; opacity: 0;} 
+	to {bottom: 30px; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+	from {bottom: 0; opacity: 0;}
+	to {bottom: 30px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+	from {bottom: 30px; opacity: 1;} 
+	to {bottom: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+	from {bottom: 30px; opacity: 1;}
+	to {bottom: 0; opacity: 0;}
+  }
+
+/**	Snack bar Ends	**/
+
+.booking_row{
+	padding: 50px;
+}
+
+
+.cell {
+    border: 1px solid #BDBDBD;
+    margin: 2px;
+    cursor: pointer;
+    border-radius: 7px;
+}
+
+.cell:hover {
+    border: 1px solid #3D5AFE
+}
+
+.cell.select {
+    background-color: #3D5AFE;
+    color: #fff
+}
+
+
+
+  .slot-unavailable {
+	color: white;
+	background-color: black;
+	font-weight: bolder;
+	border: 1px solid white;
+ }
+  .slot-booked {
+	color: white;
+	font-weight: bolder;
+	background-color: #28a745;
+	border: 1px solid white;
+ }
+ .slot-selected {
+
+	background-color: #007bff;
+
+ }
+ .slot-notavailable {
+	color: white;
+	font-weight: bolder;
+	background-color: #343a40;
+	border: 1px solid white;
+ }
+
+       .dash-boxes{
+       float: left;
+       margin-left: 50px;
+       margin-top: 20px;
+       text-align: center;
+       font-size: 12px;
+       font-weight: bold;
+       color: #8c8c8c;
+        font-family: "Poppins";
+      }
+      .dash-icon{
+       border: 1px solid #e4e4e4;
+       padding: 20px;
+       margin-left: 10px;
+       margin-top: 10px;
+       border-radius: 5px;
+       margin-bottom: 5px;
+      }
+      .dash-icons{
+        height: 130px;
+      }
