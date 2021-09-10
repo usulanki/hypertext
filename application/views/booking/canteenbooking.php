@@ -1,54 +1,68 @@
-    <!-- Content Wrapper -->
+<!-- Begin Page Content -->
+<div class="container-fluid">
 
-    <div id="content-wrapper" class="d-flex flex-column">
-
-        <!-- Main Content -->
-        <div id="content">
-            <!-- End of Topbar -->
-
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Booking for <?php echo $bookingRoomMessage; ?></h1>
-                </div>
-
-                <!-- Content Row -->
-
-                <div class="row booking_card">
-                    <div class="slots">
-                    </div>
-                    <div class="booking-seat-container">
-
-                                    <div class="mt-4 text-center small">
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> Booked
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> Blocked
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-dark"> </i> Not available
-                                        </span>
-                                    </div>
-                    </div>
-
-
-                                   
-                                
-                </div>
-<div class="row justify-content-center mx-0">
-
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Booking for <?php echo $bookingRoomMessage; ?></h1>
     </div>
+
+    <!-- Content Row -->
+
+    <div class="row booking_card">
+        <div class="slots">
+        </div>
+        <div class="booking-seat-container">
+
+            <div class="mt-4 text-center small">
+                <span class="mr-2">
+                    <i class="fas fa-circle text-primary"></i> Booked
+                </span>
+                <span class="mr-2">
+                    <i class="fas fa-circle text-success"></i> Blocked
+                </span>
+                <span class="mr-2">
+                    <i class="fas fa-circle text-dark"> </i> Not available
+                </span>
             </div>
         </div>
+
+
+
+
+    </div>
+    <div class="row justify-content-center mx-0">
+
     </div>
 
+<!-- Modal -->
+<div class="modal fade " id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content ">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Seat Booking</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form method="post" id="userbookingForm">
+                <div class="row booking_row">
+                </div>
+            </form>        
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
-<div id="mySidenav" class="sidenav card border-left-primary shadow h-100 py-2">
+</div>
+
+
+
+
+
+<!-- <div id="mySidenav" class="sidenav card border-left-primary shadow h-100 py-2">
 
 <div class="dropdown hierarchy-select" id="example">
     <button type="button" class="btn btn-secondary dropdown-toggle" id="example-two-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
@@ -91,4 +105,4 @@
     
   <a href="javascript:void(0)" class="closebookingbtn closebtn">&times;</a>
 
-</div>
+</div> -->

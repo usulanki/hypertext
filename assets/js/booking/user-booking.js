@@ -41,38 +41,22 @@ $(document).ready(function () {
   var dateDiv = getDateData();
   $('.booking_card').prepend(dateDiv)
   initDataCarousel();
-  function slotsTime(){
-    var slotsDiv = '';
-    $.ajax({
-      type: 'GET',
-      url: '/api/booking/getListOfAvailableSlots',
-      async: false,
-      success: function (response) {
-        if (response.status == true) {
-          slotsDiv += '<div class="col-lg-10"> <div class="card border-0"> <div class="card-body p-3 p-sm-5"> <div class="row text-center mx-0">';
 
-          response.data.listOfSlots.forEach(element => {
-            slotsDiv += '<div class="col-md-2 col-4 my-1 px-2" shiftid='+element.shift_id+'> <div class="cell py-1">'+element.shift_data+'</div></div>';
-          });
-          slotsDiv += '</div></div></div></div>';
-          $('.slots').prepend(slotsDiv)
-        }
-  
-      }
-    });
-  }
 
   function getDateData() {
     let curr = new Date();
     let week = []
     let days = ['sun', 'mon', 'tue', 'wed', 'thur', 'fri', 'sat'];
     let first = curr.getDate()
+    
     let day = new Date(curr.setDate(first)).toISOString().slice(0, 10);
+    console.log(first)
     let currday = curr.getDay()
     week.push(first + "," + days[currday] + "," + day)
     for (let i = 1; i <= 7; i++) {
       let first = curr.getDate() + 1;
       let day = new Date(curr.setDate(first)).toISOString().slice(0, 10);
+      
       let currday = curr.getDay();
       let currdate = curr.getDate();
       if (currdate < 10) {
@@ -81,6 +65,7 @@ $(document).ready(function () {
 
       week.push(currdate + "," + days[currday] + "," + day)
     }
+    
     var dateDiv = '<div><ul class="nav nav-tabs"><div class="owl_1 owl-carousel owl-theme">';
     week.forEach(element => {
       var dates = element.split(",");
@@ -115,23 +100,24 @@ $(document).ready(function () {
       success: function (res) {
         var buildindFloorDiv = '';
 
-        buildindFloorDiv += ' <div class="col-lg-12 seat-container" todaydate = ' + day + ' '
+        buildindFloorDiv += ' <div class="col-lg-10 seat-container" todaydate = ' + day + ' '
         buildindFloorDiv += 'rid=' + urlPath['2'] + ' fid=' + urlPath['3'] + '>'
-        buildindFloorDiv += '<div class="card border-left-primary shadow h-100 py-2"><div class="card-body"><div>';
+        buildindFloorDiv += '<div class="card border-left-primary shadow h-100 py-2"><div class="card-body p-3 p-sm-5"><div class="row seatrow text-center mx-0">';
         res.data.floorRoomDetails.forEach(elementseat => {
-          buildindFloorDiv += '<div class="seatrow container">  ';
+
           Object.values(elementseat).forEach(element => {
-            var seatStatusClass = '<div placement="top" class="seat-item seat-available seat_booking " seatid = ' + element.seat_id + '>';
+             buildindFloorDiv += '<div>  ';
+            var seatStatusClass = '<div data-toggle="modal" data-target="#exampleModalCenter" placement="top" class="py-1 seat-item seat-available seat_booking " seatid = ' + element.seat_id + '>';
             if (element.bookings) {
-              if (element.bookings.booking_status == "1") { var seatStatusClass = '<div placement="top" class="seat-item seat-booked seat_booking " seatid = ' + element.seat_id + ' title="Booked by '+element.bookings.first_name+'" >'; }
-              if (element.bookings.booking_status == "3") { var seatStatusClass = '<div placement="top" class="seat-item seat-notavailable seat_booking " seatid = ' + element.seat_id + ' >' ; }
+              if (element.bookings.booking_status == "1") { var seatStatusClass = '<div data-toggle="modal" data-target="#exampleModalCenter" placement="top" class="seat-item seat-booked seat_booking " seatid = ' + element.seat_id + ' title="Booked by '+element.bookings.first_name+'" >'; }
+              if (element.bookings.booking_status == "3") { var seatStatusClass = '<div data-toggle="modal" data-target="#exampleModalCenter" placement="top" class="seat-item seat-notavailable seat_booking " seatid = ' + element.seat_id + ' >' ; }
             }
-            buildindFloorDiv += seatStatusClass + element.seat_code + '</div>  ';
+            buildindFloorDiv += seatStatusClass + element.seat_code + '</div>  </div>  ';
 
 
 
           });
-          buildindFloorDiv += ' </div>';
+
         });
         buildindFloorDiv += ' </div> </div> </div>   </div></div> </div>';
         buildindFloorDiv += '<div class="mt-4 text-center small"><span class="mr-2"><i class="fas fa-circle text-primary"></i> Booked</span> <span class="mr-2"><i class="fas fa-circle text-success"></i> Blocked</span><span class="mr-2"><i class="fas fa-circle text-dark"></i> Not available</span></div>';
@@ -150,7 +136,7 @@ $(document).ready(function () {
     seatDiv += '<div class="form-group col-md-12 bookingseatid"><label for="seat_code">Selected Seat</label><div><input type="text" class="form-control" readonly name="seat_code" seatid=' + $(this).attr('seatid') + ' value=' + $(this)[0].innerText + '></div><span class="error-class" id="email_id-error"></span></div>';
     seatDiv += '<div class="form-group col-md-12 bookingseatid" style="display: none;"><label for="seat_id">Selected Seat</label><div><input type="text" class="form-control" readonly name="seatId"  value=' + $(this).attr('seatid') + '></div><span class="error-class" id="email_id-error"></span></div>';
     seatDiv += '<div class="form-group col-md-12 bookingdate"><label for="bookingfordate">Selected Booking Date</label><div><input type="text" readonly class="form-control" name="bookingfordate" value=' + todaydate + '></div><span class="error-class" id="email_id-error"></span></div>';
-    seatDiv += '<div class="col-md-12 form-group"><div class="error-class" id="message-error"></div></div><div class="col-md-12"><button type="submit" class="btn btn-info float-right">Book</button></div>';
+    seatDiv += '<div class="col-md-12 form-group"><div class="error-class" id="message-error"></div></div><div class="col-md-12"><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button><button type="submit" class="btn btn-primary float-right">Book</button></div>';
     if ($('.bookingseatid').length > 0) {
       $('.bookingseatid').remove();
     }
@@ -203,9 +189,9 @@ $(document).ready(function () {
       $(this).addClass("seat-selected");
     }
 
-    if (!this.classList.contains("seat-notavailable")) {
-      document.getElementById("mySidenav").style.width = "350px";
-    }
+    // if (!this.classList.contains("seat-notavailable")) {
+    //   document.getElementById("mySidenav").style.width = "350px";
+    // }
 
 
   });

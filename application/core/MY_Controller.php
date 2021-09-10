@@ -23,7 +23,8 @@ class MY_Controller extends CI_Controller {
 
 	public function load_inner_page($page, $data = ''){
 		$this->load->view('common/head', $data);
-		$this->load->view('common/header', $data);
+		$this->load->view('common/side-navbar', $data);
+		$this->load->view('common/header-items', $data);
 		$this->load->view($page, $data);
 		$this->load->view('common/footer', $data);
 	}

@@ -1,9 +1,4 @@
-    <!-- Content Wrapper -->
 
-    <div id="content-wrapper" class="d-flex flex-column">
-
-        <!-- Main Content -->
-        <div id="content">
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
@@ -195,3 +190,4 @@
         <!-- End of Main Content -->
     </div>
     <!-- End of Content Wrapper -->
+</div>

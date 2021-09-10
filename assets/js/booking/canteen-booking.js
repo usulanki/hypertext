@@ -86,7 +86,7 @@ $(document).ready(function () {
           async: false,
           success: function (response) {
             if (response.status == true) {
-              slotsDiv += '<div class="col-lg-10"> <div class="card border-0"> <div class="card-body p-3 p-sm-5"> <div class="row listslots text-center mx-0">';
+              slotsDiv += '<div class="col-lg-10"> <div class="card border-left-primary shadow h-100 py-2"> <div class="card-body p-3 p-sm-5"> <div class="row listslots text-center mx-0">';
     
               response.data.listOfSlots.forEach(element => {
                 slotsDiv += '<div class="col-md-2 col-4 my-1 px-2 slotstime slot-available slot_booking" shiftid='+element.shift_id+' shiftdata ='+element.shift_data+' date='+day+'> <div class="cell py-1">'+element.shift_data+'</div></div>';
@@ -131,23 +131,24 @@ $(document).ready(function () {
           success: function (res) {
             var buildindFloorDiv = '';
     
-            buildindFloorDiv += ' <div class="col-lg-12 seat-container" todaydate = ' + day + ' shiftid = ' + slotTime + ' shiftdata ='+slotData+' '
+            buildindFloorDiv += ' <div class="col-lg-10 seat-container" todaydate = ' + day + ' shiftid = ' + slotTime + ' shiftdata ='+slotData+' '
             buildindFloorDiv += 'rid=' + urlPath['2'] + ' fid=' + urlPath['3'] + '>'
-            buildindFloorDiv += '<div class="card border-left-primary shadow h-100 py-2"><div class="card-body"><div>';
+            buildindFloorDiv += '<div class="card border-left-primary shadow h-100 py-2"><div class="card-body p-3 p-sm-5"><div class="row seatrow text-center mx-0">';
             res.data.floorRoomDetails.forEach(elementseat => {
-              buildindFloorDiv += '<div class="seatrow container">  ';
+
               Object.values(elementseat).forEach(element => {
-                var seatStatusClass = '<div placement="top" class="seat-item seat-available seat_booking " seatid = ' + element.seat_id + '>';
+                buildindFloorDiv += '<div>  ';
+                var seatStatusClass = '<div data-toggle="modal" data-target="#exampleModalCenter" placement="top" class=" py-1 seat-item seat-available seat_booking " seatid = ' + element.seat_id + '>';
                 if (element.bookings) {
-                  if (element.bookings.booking_status == "1") { var seatStatusClass = '<div placement="top" class="seat-item seat-booked seat_booking " seatid = ' + element.seat_id + ' title="Booked by '+element.bookings.first_name+'" >'; }
-                  if (element.bookings.booking_status == "3") { var seatStatusClass = '<div placement="top" class="seat-item seat-notavailable seat_booking " seatid = ' + element.seat_id + ' >' ; }
+                  if (element.bookings.booking_status == "1") { var seatStatusClass = '<div data-toggle="modal" data-target="#exampleModalCenter" placement="top" class="seat-item seat-booked seat_booking " seatid = ' + element.seat_id + ' title="Booked by '+element.bookings.first_name+'" >'; }
+                  if (element.bookings.booking_status == "3") { var seatStatusClass = '<div data-toggle="modal" data-target="#exampleModalCenter" placement="top" class="seat-item seat-notavailable seat_booking " seatid = ' + element.seat_id + ' >' ; }
                 }
-                buildindFloorDiv += seatStatusClass + element.seat_code + '</div>  ';
+                buildindFloorDiv += seatStatusClass + element.seat_code + '</div> </div>  ';
     
     
     
               });
-              buildindFloorDiv += ' </div>';
+
             });
             buildindFloorDiv += ' </div> </div> </div>   </div></div> </div>';
             buildindFloorDiv += '<div class="mt-4 text-center small"><span class="mr-2"><i class="fas fa-circle text-primary"></i> Booked</span> <span class="mr-2"><i class="fas fa-circle text-success"></i> Blocked</span><span class="mr-2"><i class="fas fa-circle text-dark"></i> Not available</span></div>';
@@ -169,7 +170,7 @@ $(document).ready(function () {
         seatDiv += '<div class="form-group col-md-12 bookingdate"><label for="bookingfordate">Selected Booking Date</label><div><input type="text" readonly class="form-control" name="bookingfordate" value=' + todaydate + '></div><span class="error-class" id="email_id-error"></span></div>';
         seatDiv += '<div class="form-group col-md-12 slotdata"><label for="shitftid">Selected Slot Time</label><div><input type="text" readonly class="form-control" name="shiftdata" value=' + shiftdata + '></div><span class="error-class" id="email_id-error"></span></div>';
         seatDiv += '<div class="form-group col-md-12 slotid" style="display: none;"><label for="shitftid">Selected Slot Time</label><div><input type="text" readonly class="form-control" name="shiftid" value=' + shiftid + '></div><span class="error-class" id="email_id-error"></span></div>';
-        seatDiv += '<div class="col-md-12 form-group"><div class="error-class" id="message-error"></div></div><div class="col-md-12"><button type="submit" class="btn btn-info float-right">Book</button></div>';
+        seatDiv += '<div class="col-md-12 form-group"><div class="error-class" id="message-error"></div></div><div class="col-md-12"><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button><button type="submit" class="btn btn-secondary float-right">Book</button></div>';
         if ($('.bookingseatid').length > 0) {
           $('.bookingseatid').remove();
         }

@@ -29,5 +29,6 @@ foreach ($arr as $key => $value) { ?>
 
 <script src="<?= base_url('assets/js/dropdown/hierarchy-select.min.js');?>"></script>
 <script src="<?= base_url('assets/js/Chart.min.js');?>"></script>
+<script src="<?= base_url('assets/js/sb-admin-2.min.js');?>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 </body>

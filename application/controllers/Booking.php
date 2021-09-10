@@ -64,7 +64,7 @@ class Booking extends MY_Controller
 					}
 				}							
 
-			if( ($key % 9) == 0   && $key!=0 ){
+			if( ($key % 40) == 0   && $key!=0 ){
 				$i++;
 			} 
 		}
@@ -113,7 +113,7 @@ class Booking extends MY_Controller
 		
 
 
-			if( ($key % 9) == 0   && $key!=0 ){
+			if( ($key % 40) == 0   && $key!=0 ){
 				$i++;
 			} 
 		}
@@ -211,7 +211,7 @@ class Booking extends MY_Controller
 						}
 					}									
 
-				if( ($key % 9) == 0   && $key!=0 ){
+				if( ($key % 40) == 0   && $key!=0 ){
 				 $i++;
 				} 
 
@@ -373,7 +373,8 @@ class Booking extends MY_Controller
 			}
 			$ids = array();
 			$listOfSlots = array();
-			$bookingDetails = $this->booking_model->listSeatsBySlotTime($forDate);
+			//$bookingDetails = $this->booking_model->listSeatsBySlotTime($forDate);
+			$bookingDetails = '';
 			if(!empty($bookingDetails)){
 				foreach ($bookingDetails as $key => $value) {
 					array_push($ids,$value['meal_id']);
