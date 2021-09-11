@@ -78,3 +78,6 @@ $route['api/booking/userBooking'] = 'Booking/postUserBooking';
 $route['api/booking/userBookingDetails'] = 'Booking/getUserDetailsBySeatIdAndDate';
 $route['api/booking/userBookingsCountByMonth'] = 'Booking/numberOfUserBookedByMonth';
 $route['api/booking/getListOfAvailableSlots'] = 'Booking/getListOfAvailableSlots';
+
+//profile
+$route['profile'] = 'Dashboard/loadProfile';

@@ -82,7 +82,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body submitbookingbody">
       <form method="post" id="userbookingForm">
                 <div class="row booking_row">
                 </div>

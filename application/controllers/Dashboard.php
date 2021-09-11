@@ -41,6 +41,12 @@ class Dashboard extends MY_Controller {
     	$this->load_inner_page('dashboard/company_employee_dashboard',$data);
     }
 
+	public function loadProfile(){
+
+		$data['userDetails'] = $this->dashboard_model->getUserDetails($this->session->user_id);
+		$this->load_inner_page('common/profile',$data);
+	}
+
 	/*public function index()
 	{    
         $role_id =  $this->session->userdata('role_id');

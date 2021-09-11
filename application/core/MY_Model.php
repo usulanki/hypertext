@@ -31,6 +31,15 @@ class MY_Model extends CI_Model{
 		return false;
 	}
 
+	public function insertReturnId($table_name, $new_row_data){
+		$new_row_data['created_at'] = get_utc_datetime();
+		if($this->db->insert($table_name, $new_row_data)){
+			return $this->db->insert_id();
+			
+		}
+		return false;
+	}
+
 	/*
 		Function: lists
 		Purpose: To get array data by passing table name

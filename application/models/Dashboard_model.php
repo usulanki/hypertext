@@ -35,6 +35,25 @@ class Dashboard_Model extends MY_Model
 		return $this->run_query($sql);
    }
 
+   public function getUserDetails($userId){
+      $sql = "SELECT 
+                  u.user_id,
+                  u.email_id,
+                  u.first_name,
+                  u.middle_name,
+                  u.last_name,u.gender,u.phone,u.address,d.department_name,dn.designation_name,
+                  CONCAT_WS(' ',u.first_name, u.middle_name, u.last_name) AS user_full_name,
+                  u.user_type
+               FROM 
+                  users AS u
+                  INNER JOIN department d on d.department_id = u.department_id
+                  INNER JOIN designations dn on dn.designation_id = u.designation_id
+                  WHERE u.user_id = '$userId' and u.is_active =1
+                  ";
+
+      return $this->run_query($sql);                  
+   }
+
 
 
 

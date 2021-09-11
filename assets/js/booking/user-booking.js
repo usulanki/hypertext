@@ -132,6 +132,7 @@ $(document).ready(function () {
 
     var todaydate = document.getElementsByClassName('seat-container')[0].getAttribute("todaydate");
     $('.booking_row').html('');
+
     var seatDiv = '<div class="form-group col-md-12"><label for="toUserId">Enter Employee id</label><div><input type="text" class="form-control" name="toUserId"></div><span class="error-class" id="email_id-error"></span></div>';
     seatDiv += '<div class="form-group col-md-12 bookingseatid"><label for="seat_code">Selected Seat</label><div><input type="text" class="form-control" readonly name="seat_code" seatid=' + $(this).attr('seatid') + ' value=' + $(this)[0].innerText + '></div><span class="error-class" id="email_id-error"></span></div>';
     seatDiv += '<div class="form-group col-md-12 bookingseatid" style="display: none;"><label for="seat_id">Selected Seat</label><div><input type="text" class="form-control" readonly name="seatId"  value=' + $(this).attr('seatid') + '></div><span class="error-class" id="email_id-error"></span></div>';
@@ -182,8 +183,8 @@ $(document).ready(function () {
 
       $('.booking_row').prepend(seatDiv);
       $(this).removeClass("seat-available");
-      $('.seatrow>div.seat-selected').addClass('seat-available');
-      $('.seatrow>div.seat-selected').removeClass('seat-selected');
+      $('.seatrow>div>div.seat-selected').addClass('seat-available');
+      $('.seatrow>div>div.seat-selected').removeClass('seat-selected');
       
 
       $(this).addClass("seat-selected");
@@ -202,10 +203,9 @@ $(document).ready(function () {
   });
 
   $('#userbookingForm').submit(function (event) {
+    
     event.preventDefault();
     var form = $(this);
-    console.log($(this));
-
     var form_id = form.attr('id');
     var revokeBooking = '0';
     var booking_data = $(this).serialize();
@@ -233,9 +233,9 @@ $(document).ready(function () {
           }
         }
         if (response.status == true) {
-          console.log($(this));
-          myFunction(response.message);
-          console.log(revokeBooking)
+          var succesDiv = '<div class="thank-you-pop"><img src="http://goactionstations.co.uk/wp-content/uploads/2017/03/Green-Round-Tick.png" alt=""><h1>Thank You!</h1><p>Your booking is confirmed</p><h3 class="cupon-pop">Your Id: <span>'+response.data.bookingDetails+'</span></h3></div>';
+          
+          $('.booking_row').html(succesDiv);
           if (revokeBooking) {
             $(this).addClass("seat-available");
             $(this).removeClass("seat-booked");
@@ -246,6 +246,8 @@ $(document).ready(function () {
             $(this).addClass("seat-booked");
           }
 
+        }else{
+          myFunction(response.message);
         }
         $(".closebookingbtn").click();
       }

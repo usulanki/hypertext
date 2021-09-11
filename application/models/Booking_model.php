@@ -186,7 +186,7 @@ class Booking_Model extends MY_Model
          'meal_id'=>$mealId,
          'booked_by'=>$bookedById
      );
-      return $this->insert('user_bookings',$data);
+   return $this->insertReturnId('user_bookings',$data);
 
    }
 

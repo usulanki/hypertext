@@ -268,28 +268,32 @@ class Booking extends MY_Controller
 				if ( (empty($isSeatAvailable) && empty($isUserAlreadyBookedForDate) ) || ($mealId != 'null') ) {
 					$userBookingResult = $this->booking_model->saveUserBooking($toUserId, $seatId, $bookingfordate,$mealId, $fromUserId);
 
-					$message = 'Booked Done for '.$toUserId.' at ' . $bookingfordate;
+					$messageSucess = 'Booked Done for '.$toUserId.' at ' . $bookingfordate;
 				}else{
-					$message = 'Selected seat is not free or you have selected a seat today already';
+					$messageErr = 'Selected seat is not free or you have selected a seat today already';
 				}
 			}else{
 				if($revokeBooking) {
-					$revokeDetails = $this->booking_model->deleteUserBooking($toUserId,$seatId);
-					$message = 'Booking revoked';
+					$userBookingResult = $this->booking_model->deleteUserBooking($toUserId,$seatId);
+					$messageSucess = 'Booking revoked';
 				}else{
 					if(!$isAllowedToBook) {
-						$message = 'You dont have access to book seat ';
+						$messageErr = 'You dont have access to book seat ';
 				   }else{
-					   $message = 'Please Select Date greater than today';	
+					   $messageErr = 'Please Select Date greater than today';	
 				   }
 				}
 
 				
 			}
-
 			$output['bookingDetails'] = '';
+			if(!empty($messageErr)){
+				return setResponse(false, $output, $messageErr);
+			}
+			$output['bookingDetails'] = $userBookingResult;
+			
 			//$output['userBookings'] = $userBookings;
-			return setResponse(true, $output, $message);
+			return setResponse(true, $output, $messageSucess);
 		} catch (Exception $e) {
 			return setResponse(false, $output, $e);
 		}
