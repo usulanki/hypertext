@@ -42,6 +42,19 @@ class Booking_Model extends MY_Model
       return $this->run_query($sql); 
    }
 
+   public function getFloorsRoomsDetails($rid){
+
+      $sql = "SELECT 
+               r.*
+               FROM 
+                 rooms as r
+               WHERE
+               r.room_status in ('ACTIVE') AND 
+               r.room_id=".$rid ;                       
+
+      return $this->run_query($sql); 
+   }
+
    public function getListOfRoomSeats($rid,$fid){
 
       $sql = "SELECT 
@@ -242,5 +255,52 @@ class Booking_Model extends MY_Model
 
       return $this->run_query($sql);      
    }
+
+   public function listNoOfUsersBookedByFloorDate($floorId,$date){
+
+      $sql = "SELECT COUNT(s.seat_id) as total,s.floor_id FROM seats s
+               JOIN user_bookings us 
+               ON us.seat_id = s.seat_id where s.floor_id='$floorId' b.booked_for_date  >= '". $date . "' AND b.booked_for_date <= '". $date . " 23:59'  
+               GROUP by s.floor_id ";
+
+      return $this->run_query($sql);     
+
+   }
+
+   public function listOfUserBookingsDate($userId,$date){
+
+      $sql = "SELECT 
+               b.*
+               FROM              
+               user_bookings as b
+               WHERE b.booked_for_date  >= '". $date . "' AND b.booked_for_date <= '". $date . " 23:59' 
+               AND b.user_id = ".$userId;
+      return $this->run_query($sql);
+   }
+
+   public function listOfUserBookingsByDate($userId,$date){
+      
+      $sql = "SELECT 
+               b.*
+               FROM              
+               user_bookings as b
+               WHERE b.booked_for_date  >= '". $date . "' AND b.booked_for_date <= '". $date . " 23:59' 
+               AND b.booked_by = ".$userId;
+      return $this->run_query($sql);
+   }
+
+   public function getFloorRoomDetailsBySeatId($sid){
+
+      $sql = "SELECT 
+               s.*
+               FROM 
+               seats as s
+               WHERE
+               s.seat_status in ('ACTIVE') AND 
+               s.seat_id=".$sid." ";                       
+
+      return $this->run_query($sql);
+   }
+
 
 }

@@ -69,6 +69,7 @@ $route['add_company'] = 'Company/add_company';
 
 //booking
 $route['booking'] = 'Booking/index';
+$route['userbookings'] = 'Booking/getListUserBookingsDetailsByDate';
 $route['booking/(:any)/(:any)'] = 'Booking/listSeatsByRoomDate/$1/$2';
 $route['canteen/(:any)/(:any)'] = 'Booking/viewCanteenBookings/$1/$2';
 $route['api/booking/listBuildingFloors'] = 'Booking/getBuildingFloorDetails';
@@ -78,6 +79,7 @@ $route['api/booking/userBooking'] = 'Booking/postUserBooking';
 $route['api/booking/userBookingDetails'] = 'Booking/getUserDetailsBySeatIdAndDate';
 $route['api/booking/userBookingsCountByMonth'] = 'Booking/numberOfUserBookedByMonth';
 $route['api/booking/getListOfAvailableSlots'] = 'Booking/getListOfAvailableSlots';
+$route['api/booking/getListUserBookingsDetailsByDate/(:any)'] = 'Booking/getListUserBookingsDetailsByDate/$1';
 
 //profile
 $route['profile'] = 'Dashboard/loadProfile';

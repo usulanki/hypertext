@@ -242,15 +242,15 @@ class Booking extends MY_Controller
 				$toUserId = $data['toUserId'];
 				$bookingfordate = $data['bookingfordate'];
 				$seatId = $data['seatId'];
-				$revokeBooking = ['revokeBooking'];
-				$mealId = ['shiftid'];
+				$revokeBooking = $data['revokeBooking'];
+				$mealId = $data['shiftId'];
 			} else {
 				$fromUserId = $this->session->userdata('user_id');
 				$toUserId = $this->input->post('toUserId');
 				$bookingfordate = $this->input->post('bookingfordate');
 				$seatId = $this->input->post('seatId');
 				$revokeBooking = $this->input->post('revokeBooking');
-				$mealId = $this->input->post('shiftid');
+				$mealId = $this->input->post('shiftId');
 			}
 			$logged_user_type = $this->session->userdata('user_type');
 			$allowedUserTypes = array('SUPER_ADMIN', 'COMPANY_ADMIN');
@@ -262,11 +262,14 @@ class Booking extends MY_Controller
 			if ($bookingfordate > $today && $isAllowedToBook && !$revokeBooking) {
 				
 				$isUserAlreadyBookedForDate =  $this->booking_model->listUserBookingsByDate($bookingfordate, $toUserId);
-				
+				//echo "<pre>";print_r($isUserAlreadyBookedForDate);exit();
 				$isSeatAvailable = $this->booking_model->listUserSeatBydate($bookingfordate, $toUserId, $seatId);
-
-				if ( (empty($isSeatAvailable) && empty($isUserAlreadyBookedForDate) ) || ($mealId != 'null') ) {
+				if(empty($isSeatAvailable) && $mealId != '0'){
 					$userBookingResult = $this->booking_model->saveUserBooking($toUserId, $seatId, $bookingfordate,$mealId, $fromUserId);
+
+					$messageSucess = 'Booked Done for '.$toUserId.' at ' . $bookingfordate;					
+				} elseif ( (empty($isSeatAvailable) && empty($isUserAlreadyBookedForDate) ) ) {
+					$userBookingResult = $this->booking_model->saveUserBooking($toUserId, $seatId, $bookingfordate,null, $fromUserId);
 
 					$messageSucess = 'Booked Done for '.$toUserId.' at ' . $bookingfordate;
 				}else{
@@ -398,5 +401,48 @@ class Booking extends MY_Controller
 			
 		}
 	}
+
+	public function getListUserBookingsDetailsByDate(){
+
+		$userId = $this->session->userdata('user_id');
+		$date = '2021-09-05';
+		$message = '';
+		if(empty($userId)) { $message = 'Invalid Request'; }
+		$userBookingDetails = $this->booking_model->listOfUserBookingsDate($userId,$date);
+		$newUserBookingDetails = array();
+		$newUserBookedByDetails = array();
+		foreach ($userBookingDetails as $key => $value) {
+			$newUserBookingDetails[$key] = $value;
+			$seatDetails = $this->booking_model->getFloorRoomDetailsBySeatId($value['seat_id']);
+
+			$roomDetails = $this->booking_model->getFloorsRoomsDetails($seatDetails['0']['room_id']);
+			$floorDetails = $this->booking_model->getBuildingFloorDetailsById($seatDetails['0']['floor_id']);
+			$newUserBookingDetails[$key]['roomDetails'] = $roomDetails['0'];
+			$newUserBookingDetails[$key]['floorDetails'] = $floorDetails['0'];
+			$newUserBookingDetails[$key]['seatDetails'] = $seatDetails['0'];
+
+		}
+		$userBookingByDetails = $this->booking_model->listOfUserBookingsByDate($userId,$date);
+		foreach ($userBookingByDetails as $key => $value) {
+			$newUserBookedByDetails[$key] = $value;
+			$seatDetails = $this->booking_model->getFloorRoomDetailsBySeatId($value['seat_id']);
+
+			$roomDetails = $this->booking_model->getFloorsRoomsDetails($seatDetails['0']['room_id']);
+			$floorDetails = $this->booking_model->getBuildingFloorDetailsById($seatDetails['0']['floor_id']);
+			$newUserBookedByDetails[$key]['roomDetails'] = $roomDetails['0'];
+			$newUserBookedByDetails[$key]['floorDetails'] = $floorDetails['0'];
+			$newUserBookedByDetails[$key]['seatDetails'] = $seatDetails['0'];
+
+		}
+		$output['userBookingDetails'] = $newUserBookingDetails;
+		$output['userBookedByDetails'] = $newUserBookedByDetails;
+
+		$arr = array();
+		$jsArr = addJs($arr, base_url('assets/js/booking/userbooking_details.js'));
+		$this->load_inner_page('booking/userbookings', ['userBookingData' => $output] );
+		//return setResponse(true, $output, $message);
+		
+	}
+
 
 }
